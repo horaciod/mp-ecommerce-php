@@ -1,2 +1,4 @@
-checking REPO solamente
- 
+checking REPO solamente 
+instalado en HEROKU 
+probando el deploy automático al modificar master
+
