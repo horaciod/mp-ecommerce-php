@@ -147,13 +147,13 @@ if ($x) {
                                     </div>
                                     <?php
 if ($preference_id): ?>
-                                    <form action="/procesar-pago" method="POST">
+<!-- <form action="/procesar-pago" method="POST">
   <script
    src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
    data-preference-id="<?php echo $preference_id; ?>" data-button-label="Pagar la compra">
   </script>
-</form>
-
+</form> -->
+ <a href="<?php echo $mp->preference->init_point; ?>" class="mercadopago-button" style="padding:1em">Pagar la Compra</a>
                                     <!-- <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button> -->
                             <?php
 else:

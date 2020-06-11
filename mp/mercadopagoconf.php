@@ -43,7 +43,7 @@ class mp_local
         $this->preference->back_urls =(object) array(
             "success" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/graciasporelpago.php",
             "failure" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/errorenelpago.php",
-            "pending" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/pagopendiente.php",
+            "pending" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/pagopendiente.php"
         );
         $payer = new MercadoPago\Payer();
         $payer->name = "Lalo";
