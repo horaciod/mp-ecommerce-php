@@ -54,9 +54,8 @@ class mp_local
             "number" => "22223333",
         );
         $payer->address =(object) array(
-            'id'=>null, 
-            "street_name" => false,
-            "street_number" => 123,
+            "street_name" => 'False',
+            "street_number" => '123',
             "zip_code" => "1111",
         );
         $this->preference->payer = $payer;
