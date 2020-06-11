@@ -40,7 +40,7 @@ class mp_local
         );
         $this->preference->external_reference = 'horaciod@gmail.com';
         $this->preference->notification_url = 'https://horaciod-mp-ecommerce-php.herokuapp.com/mp/notificacion_mp.php';
-        $this->preference->back_urls = array(
+        $this->preference->back_urls =(object) array(
             "success" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/graciasporelpago.php",
             "failure" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/errorenelpago.php",
             "pending" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/pagopendiente.php",
