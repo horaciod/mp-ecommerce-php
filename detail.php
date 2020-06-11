@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <meta name="viewport" content="width=1024">
     <title>Tienda e-commerce</title>
 
@@ -44,7 +44,7 @@
 <body class="as-theme-light-heroimage">
 
     <div class="stack">
-        
+
         <div class="as-search-wrapper" role="main">
             <div class="as-navtuck-wrapper">
                 <div class="as-l-fullwidth  as-navtuck" data-events="event52">
@@ -86,6 +86,21 @@
 
                             </div>
                         </div>
+                        <?php
+
+require "mp/mercadopagoconf.php";
+$mp = new mp_local();
+$img = $mp->image($_POST['img']) ; // TODO quitar no hace falta
+var_dump($img) ; 
+$x = $mp->additem($_POST['price'], $_POST['unit'], $_POST['title'], $img);
+if ($x) {
+    $preference_id = $mp->getboton();
+
+} else {
+    $preference_id = false;
+}
+
+?>
                         <div class="as-accessories-results  as-search-desktop">
                             <div class="width:60%">
                                 <div class="as-producttile-tilehero with-paddlenav " style="float:left;">
@@ -94,7 +109,7 @@
                                         <img src="./assets/wireless-headphones" class="ir ir item-image as-producttile-image  " style="max-width: 70%;max-height: 70%;"alt="" width="445" height="445">
                                     </div>
                                     <div class="images mini-gallery gal5 ">
-                                    
+
 
                                         <div class="as-isdesktop with-paddlenav with-paddlenav-onhover">
                                             <div class="clearfix image-list xs-no-js as-util-relatedlink relatedlink" data-relatedlink="6|Powerbeats3 Wireless Earphones - Neighborhood Collection - Brick Red|MPXP2">
@@ -102,13 +117,13 @@
                                                     <div class=""></div>
                                                     <img src="./assets/003.jpg" class="ir ir item-image as-producttile-image" alt="" width="445" height="445" style="content:-webkit-image-set(url(<?php echo $_POST['img'] ?>) 2x);">
                                                 </div>
-                                                
+
                                             </div>
 
-                                            
+
                                         </div>
 
-                                        
+
 
                                     </div>
 
@@ -124,13 +139,28 @@
                                             </h3>
                                         </div>
                                         <h3 >
-                                            <?php echo $_POST['price'] ?>
+                                            Cantidad: <?php echo $_POST['unit'] ?>
                                         </h3>
                                         <h3 >
-                                            <?php echo "$" . $_POST['unit'] ?>
+                                            <?php echo "$ " . $_POST['price'] ?>
                                         </h3>
                                     </div>
-                                    <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+                                    <?php
+if ($preference_id): ?>
+                                    <form action="/procesar-pago" method="POST">
+  <script
+   src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+   data-preference-id="<?php echo $preference_id; ?>">
+  </script>
+</form>
+
+                                    <!-- <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button> -->
+                            <?php
+else:
+?>
+                                    Imposible pagar ahora (plataforma con problemas de comunicación , intente luego)
+                                    <?php
+endif?>
                                 </div>
                             </div>
                         </div>
