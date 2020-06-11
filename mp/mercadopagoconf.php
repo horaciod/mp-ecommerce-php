@@ -53,8 +53,9 @@ class mp_local
             "area_code" => "11",
             "number" => "22223333",
         );
-        $payer->address = array(
-            "street_name" => "False",
+        $payer->address =(object) array(
+            'id'=>null, 
+            "street_name" => false,
             "street_number" => 123,
             "zip_code" => "1111",
         );
@@ -79,7 +80,9 @@ class mp_local
         $item->description = 'Dispositivo móvil de Tienda e-commerce';
         $this->preference->items = array($item);
         $this->preference->auto_return = 'approved';    
-        return $this->preference->save();
+        $ret = $this->preference->save();
+
+        return $ret; 
 
     }
 
@@ -90,17 +93,17 @@ class mp_local
         switch($type) {
             case "payment":
                 //solo implementamos esta
-                $payment = MercadoPago\Payment.find_by_id($id);
+                $payment = MercadoPago\Payment::find_by_id($id);
                 return $payment; 
                 break;
             case "plan":
-                $plan = MercadoPago\Plan.find_by_id($id);
+                $plan = MercadoPago\Plan::find_by_id($id);
                 break;
             case "subscription":
-                $plan = MercadoPago\Subscription.find_by_id($id);
+                $plan = MercadoPago\Subscription::find_by_id($id);
                 break;
             case "invoice":
-                $plan = MercadoPago\Invoice.find_by_id($id);
+                $plan = MercadoPago\Invoice::find_by_id($id);
                 break;
         }
         return $plan; 
