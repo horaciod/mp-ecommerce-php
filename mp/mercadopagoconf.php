@@ -53,7 +53,7 @@ class mp_local
             "area_code" => "11",
             "number" => "22223333",
         );
-        $payer->address =(object) array(
+        $payer->address = array(
             "street_name" => 'False',
             "street_number" => '123',
             "zip_code" => "1111",
