@@ -2,7 +2,7 @@
 //require $conf['dirsistema'].'include_local/vendor/mercadopago/sdk/lib/mercadopago.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require __DIR__  . '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 class mp_local
 {
     private $access_token = 'APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398';
@@ -30,8 +30,8 @@ class mp_local
 // ...
         $this->preference->payment_methods = array(
             "excluded_payment_methods" => array(
-                array("id" => "amex")
-                
+                array("id" => "amex"),
+
             ),
             "excluded_payment_types" => array(
                 array("id" => "atm"),
@@ -40,23 +40,42 @@ class mp_local
         );
         $this->preference->external_reference = 'horaciod@gmail.com';
         $this->preference->notification_url = 'https://horaciod-mp-ecommerce-php.herokuapp.com/mp/notificacion_mp.php';
-        $this->preference->back_urls =(object) array(
+        $this->preference->back_urls = (object) array(
             "success" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/graciasporelpago.php",
             "failure" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/errorenelpago.php",
-            "pending" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/pagopendiente.php"
+            "pending" => "https://horaciod-mp-ecommerce-php.herokuapp.com/mp/pagopendiente.php",
         );
+        // $payer = new MercadoPago\Payer();
+        // $payer->name = "Lalo";
+        // $payer->surname = "Landa";
+        // $payer->email = "test_user_63274575@testuser.com";
+        // $payer->phone = array(
+        //     "area_code" => "11",
+        //     "number" => "22223333",
+        // );
+        // $payer->address = array(
+        //     "street_name" => 'False',
+        //     "street_number" => '123',
+        //     "zip_code" => "1111",
+        // );
         $payer = new MercadoPago\Payer();
-        $payer->name = "Lalo";
-        $payer->surname = "Landa";
-        $payer->email = "test_user_63274575@testuser.com";
+        $payer->id = 471923173;
+        $payer->name = 'Lalo';
+        $payer->surname = 'Landa';
+        $payer->email = 'test_user_63274575@testuser.com';
+        $payer->date_created = "2018-06-02T12:58:41.425-04:00";
         $payer->phone = array(
-            "area_code" => "11",
-            "number" => "22223333",
+            "area_code" => '11',
+            "number" => '22223333',
+        );
+        $payer->identification = array(
+            "type" => 'DNI',
+            "number" => '32659430',
         );
         $payer->address = array(
             "street_name" => 'False',
-            "street_number" => '123',
-            "zip_code" => "1111",
+            "street_number" => 123,
+            "zip_code" => '1111',
         );
         $this->preference->payer = $payer;
     }
@@ -78,22 +97,21 @@ class mp_local
 
         $item->description = 'Dispositivo móvil de Tienda e-commerce';
         $this->preference->items = array($item);
-        $this->preference->auto_return = 'approved';    
+        $this->preference->auto_return = 'approved';
         $ret = $this->preference->save();
 
-        return $ret; 
+        return $ret;
 
     }
 
-   
-    public function process_notification($type,$id){
-        
+    public function process_notification($type, $id)
+    {
 
-        switch($type) {
+        switch ($type) {
             case "payment":
                 //solo implementamos esta
                 $payment = MercadoPago\Payment::find_by_id($id);
-                return $payment; 
+                return $payment;
                 break;
             case "plan":
                 $plan = MercadoPago\Plan::find_by_id($id);
@@ -105,8 +123,6 @@ class mp_local
                 $plan = MercadoPago\Invoice::find_by_id($id);
                 break;
         }
-        return $plan; 
+        return $plan;
     }
 }
-
-
