@@ -150,7 +150,7 @@ if ($preference_id): ?>
                                     <form action="/procesar-pago" method="POST">
   <script
    src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-   data-preference-id="<?php echo $preference_id; ?>">
+   data-preference-id="<?php echo $preference_id; ?>" data-button-label="Pagar la compra">
   </script>
 </form>
 
