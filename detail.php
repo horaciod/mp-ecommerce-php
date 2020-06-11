@@ -90,9 +90,9 @@
 
 require "mp/mercadopagoconf.php";
 $mp = new mp_local();
-$img = $mp->image($_POST['img']) ; // TODO quitar no hace falta
-var_dump($img) ; 
-$x = $mp->additem($_POST['price'], $_POST['unit'], $_POST['title'], $img);
+
+
+$x = $mp->additem($_POST['price'], $_POST['unit'], $_POST['title'], $_POST['img']);
 if ($x) {
     $preference_id = $mp->getboton();
 
